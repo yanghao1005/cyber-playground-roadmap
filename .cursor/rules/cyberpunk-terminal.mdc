@@ -1,0 +1,14 @@
+---
+description: Terminal map, glyph rain, breach matrix, and simulated shell
+globs: app/cyberpunk-terminal/**,components/terminal/**
+alwaysApply: false
+---
+
+# Cyberpunk Terminal
+
+Route `/cyberpunk-terminal`. Logic stays in `components/terminal/`. Read Project 02 in @cyber_playground_roadmap.md.
+
+- Dark vector map with parabolic transmission arcs.
+- Scrolling binary and hexadecimal glyph rain.
+- Breach progress is a simulated display.
+- The shell accepts `help`, `hack`, `status`, and `override`, and prints simulated logs only.

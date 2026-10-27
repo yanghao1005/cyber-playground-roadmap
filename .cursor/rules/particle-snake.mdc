@@ -1,0 +1,15 @@
+---
+description: Particle snake score, trail, explosions, and screen shake
+globs: app/particle-snake/**,components/snake/**
+alwaysApply: false
+---
+
+# Particle Snake
+
+Route `/particle-snake`. Logic stays in `components/snake/`. Read Project 03 in @cyber_playground_roadmap.md.
+
+- Neon arcade shell. The high score is stored in localStorage.
+- The body leaves a trail and deforms slightly on a sharp turn.
+- Eating food bursts dozens of particles that respect gravity and friction.
+- A milestone or game over shakes the viewport.
+- Motion work reads `.agents/skills/emil-design-eng/SKILL.md`.

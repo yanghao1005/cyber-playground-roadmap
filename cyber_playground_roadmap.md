@@ -16,29 +16,25 @@
 
 ## 📂 Monorepo Directory Structure
 
-The entire playground is structured cleanly using Next.js App Router route groups:
+Home is the lobby. The CV is its own route, linked from the shell on every page. Experiences are an open set: each one is a slug, and adding one does not reshape the site.
 
 ```text
 cyber-playground/
 ├── app/
-│   ├── page.tsx                    # 🌟 Playground Lobby (Interactive Portal / Card Navigation)
-│   ├── generative-art/
-│   │   └── page.tsx                # Project 01: Generative Art Sandbox
-│   ├── cyberpunk-terminal/
-│   │   └── page.tsx                # Project 02: Cyberpunk Hacker Terminal Dashboard
-│   ├── particle-snake/
-│   │   └── page.tsx                # Project 03: Particle-Explosion Snake
-│   └── cyber-shelter/
-│       └── page.tsx                # Project 04: Interactive Cyber-Shelter / Lo-Fi Room
+│   ├── page.tsx                    # Lobby: one card per experience, name links to /cv
+│   ├── cv/
+│   │   └── page.tsx                # CV. Not an experience.
+│   └── <slug>/
+│       └── page.tsx                # One route per experience
 ├── components/
-│   ├── shared/                     # Shared layout elements (Floating Back-to-Lobby button, global shell)
-│   ├── generative/                 # Project 01 exclusive canvas & math logic
-│   ├── terminal/                   # Project 02 exclusive terminal & map logistics
-│   ├── snake/                      # Project 03 exclusive arcade grid & particle pool system
-│   └── shelter/                    # Project 04 exclusive weather canvas & audio synthesizer
+│   ├── shared/                     # Shell: back to lobby, link to /cv
+│   ├── cv/                         # CV layout only
+│   └── <slug>/                     # That experience's logic only
 └── public/
-    └── assets/                     # Static assets, fallback icons, or textures
+    └── assets/                     # Static assets. No audio files.
 ```
+
+Current experience slugs: `generative-art`, `cyberpunk-terminal`, `particle-snake`, `cyber-shelter`. A new one adds `app/<slug>/`, `components/<slug>/`, a section in this file, and `.cursor/rules/<slug>.mdc`.
 
 ---
 

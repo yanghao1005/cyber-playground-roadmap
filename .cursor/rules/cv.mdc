@@ -1,0 +1,14 @@
+---
+description: CV page content, layout, and the shell link to it
+globs: app/cv/**,components/cv/**
+alwaysApply: false
+---
+
+# CV
+
+Route `/cv`. Layout and sections stay in `components/cv/`. The lobby stays `app/page.tsx`.
+
+- The page is a readable CV: identity, work, projects, contact. It is not a canvas experience and it does not synthesize audio.
+- The shared shell already links here. This page links back to `/`.
+- Copy is real CV content. Do not invent employers, dates, or titles.
+- Read `.agents/skills/frontend-design/SKILL.md` and `.agents/skills/web-design-guidelines/SKILL.md` before changing the layout.

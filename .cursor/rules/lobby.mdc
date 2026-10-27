@@ -1,0 +1,14 @@
+---
+description: Lobby portal cards and the shared shell
+globs: app/page.tsx,components/shared/**
+alwaysApply: false
+---
+
+# Lobby
+
+Own `app/page.tsx` and `components/shared/`. The portal line is in @cyber_playground_roadmap.md.
+
+- `app/page.tsx` is the interactive portal: one card per experience listed in @cyber_playground_roadmap.md. The person's name on this page links to `/cv`. The page is not the CV.
+- `components/shared/` holds the global shell, the floating back-to-lobby control, and the link to `/cv`.
+- A project folder does not import another project folder.
+- Route changes follow `.agents/skills/vercel-react-view-transitions/SKILL.md`.

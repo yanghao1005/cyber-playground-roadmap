@@ -1,0 +1,15 @@
+---
+description: Generative art canvas, control deck, presets, and snapshot
+globs: app/generative-art/**,components/generative/**
+alwaysApply: false
+---
+
+# Generative Art
+
+Route `/generative-art`. Logic stays in `components/generative/`. Read Project 01 in @cyber_playground_roadmap.md.
+
+- Fullscreen canvas, double-buffered, locked at 60 FPS.
+- Floating glass deck with live controls for rotation velocity, noise scale, and the color gradient cycle.
+- Presets switch the mathematical model on the same route.
+- Snapshot exports the current frame as a PNG.
+- Drawing stays on canvas. This experience does not synthesize audio.

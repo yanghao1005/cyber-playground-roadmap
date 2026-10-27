@@ -1,0 +1,14 @@
+---
+description: Shelter room, weather canvas, clicks, and Web Audio
+globs: app/cyber-shelter/**,components/shelter/**
+alwaysApply: false
+---
+
+# Cyber Shelter
+
+Route `/cyber-shelter`. Logic stays in `components/shelter/`. Read Project 04 in @cyber_playground_roadmap.md.
+
+- Late-night desk viewport with lit monitors.
+- Rain slides on the glass. Lightning is drawn, not a video file.
+- A click wipes condensation, the mug emits steam, and the lamp toggles.
+- Rain and thunder come from the Web Audio API. No audio files under `public/`.

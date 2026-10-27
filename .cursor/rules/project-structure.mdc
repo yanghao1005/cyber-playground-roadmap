@@ -1,0 +1,21 @@
+---
+description: How routes, component folders, and new experiences are added
+alwaysApply: true
+---
+
+# Project structure
+
+Home is `app/page.tsx`, the lobby. It is the portal to the experiences. It is not the CV.
+
+The CV is a site page, not an experience. It lives at `app/cv/page.tsx` with its components in `components/cv/`. The shared shell links to `/cv` on every page. The lobby shows the person's name, and that name links to `/cv`.
+
+An experience is one slug:
+
+- route `app/<slug>/page.tsx`, URL `/<slug>`
+- components in `components/<slug>/`
+- one section in @cyber_playground_roadmap.md
+- one rule `.cursor/rules/<slug>.mdc` with `alwaysApply: false` and `globs: app/<slug>/**,components/<slug>/**`
+
+The set of experiences is whatever the roadmap lists. Adding one does not change this rule.
+
+`components/shared/` is the shell: back to the lobby, and the link to `/cv`. Experience folders do not import each other. Static files go in `public/assets/`. No audio files under `public/`.
