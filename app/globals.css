@@ -1,26 +1,270 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0c1220;
+  --glass: rgba(16, 28, 48, 0.62);
+  --line: rgba(186, 230, 255, 0.18);
+  --cyan: #7ee0ff;
+  --amber: #ffb15a;
+  --text: #e7f2ff;
+  --muted: #8ea4c0;
+  --duration-exit: 150ms;
+  --duration-enter: 210ms;
+  --duration-move: 400ms;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-outfit), "Outfit", sans-serif;
+  --font-display: var(--font-syne), "Syne", sans-serif;
+  --color-ink: var(--ink);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-cyan: var(--cyan);
+  --color-amber: var(--amber);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(ellipse 48% 36% at 0% 0%, rgba(126, 224, 255, 0.16), transparent 62%),
+    radial-gradient(ellipse 36% 28% at 100% 100%, rgba(255, 177, 90, 0.12), transparent 58%),
+    var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--cyan);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 200;
+  background: var(--ink);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+.shell-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+}
+
+.shell-nav {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+}
+
+.shell-nav a[aria-current="page"] {
+  color: var(--amber);
+  text-decoration: none;
+}
+
+.shell-content {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 6rem;
+}
+
+.person-name {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-decoration: none;
+}
+
+a.person-name:hover {
+  color: var(--text);
+}
+
+.lobby-lead,
+.cv-empty {
+  max-width: 36rem;
+  margin-top: 1.25rem;
+  color: var(--muted);
+}
+
+.experience-index {
+  list-style: none;
+  margin: 3.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 720px) {
+  .experience-index {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.experience-index a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-height: 9rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  background: var(--glass);
+}
+
+.experience-index li:nth-child(odd) a {
+  box-shadow: inset 3px 0 0 var(--cyan);
+}
+
+.experience-index li:nth-child(even) a {
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+
+@media (min-width: 720px) {
+  .experience-index a {
+    padding-left: 1.25rem;
+  }
+
+  .experience-index li:nth-child(odd) a {
+    border-right: 1px solid var(--line);
+  }
+}
+
+.experience-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  letter-spacing: -0.03em;
+}
+
+.experience-detail {
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+.back-lobby {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  text-decoration: none;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide {
+  from { translate: var(--slide-offset); }
+  to { translate: 0; }
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(root) {
+  display: none;
+}
+
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+
+::view-transition-group(.text-morph) {
+  animation-duration: var(--duration-move);
+}
+
+::view-transition-old(.text-morph) {
+  display: none;
+}
+
+::view-transition-new(.text-morph) {
+  animation: none;
+  object-fit: none;
+  object-position: left top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }
