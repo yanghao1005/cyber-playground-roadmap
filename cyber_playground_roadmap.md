@@ -10,7 +10,7 @@
 * **Styling & UI:** `Tailwind CSS + Lucide Icons` — Unified dark mode, glassmorphism, and cyberpunk neon aesthetics.
 * **Graphics & Physics Rendering:** `HTML5 Canvas API / SVG / CSS 3D Transforms`.
 * **Audio Synthesis:** `Web Audio API` — Real-time algorithmic white noise and soundscape generation with zero external audio assets.
-* **Deployment & CI/CD:** `Vercel` — Zero-ops, automated deployments straight from `git push`.
+* **Deployment & CI/CD:** GitHub Actions runs lint, typecheck, and build on pull requests and on `main`. Vercel deploys production from `main` only, and a preview for every other pull request.
 
 ---
 

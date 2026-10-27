@@ -32,7 +32,7 @@ Each experience is `app/<slug>/` plus `components/<slug>/`. The slugs are the on
 - Next.js App Router, TypeScript, Tailwind CSS, and Lucide.
 - The brief for `frontend-design` is this playground's dark glass and cyberpunk neon.
 - Drawing is HTML canvas, SVG, or CSS 3D. Sound is the Web Audio API, inside client components.
-- The deploy target is Vercel.
+- The deploy target is Vercel. Branches, the GitHub Actions check, and what counts as a merge follow `.cursor/rules/ci-cd.mdc`.
 
 ## Done
 

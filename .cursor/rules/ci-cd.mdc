@@ -1,0 +1,24 @@
+---
+description: Branches, the GitHub Actions check, and Vercel deployment
+alwaysApply: true
+---
+
+# CI/CD and branches
+
+`main` is production. A product change goes on `cursor/<slice>`, one module on that branch, and lands through a pull request into `main`.
+
+## CI
+
+`.github/workflows/ci.yml` runs on every pull request and on every push to `main`, on Node.js 22:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+
+Do not open the pull request while this check is red. Add any new automated test to this same workflow. The green check does not replace the browser check in `AGENTS.md`.
+
+## CD
+
+Vercel is the only deploy path. Production deploys from `main`. Every other pull request gets a Vercel preview. Do not add a GitHub Actions deploy job, and do not commit a Vercel token or any `.env` file.
+
+`node_modules` and `.next` stay untracked.
