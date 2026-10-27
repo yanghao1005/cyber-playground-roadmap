@@ -11,6 +11,7 @@
   --duration-exit: 150ms;
   --duration-enter: 210ms;
   --duration-move: 400ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @theme inline {
@@ -38,6 +39,7 @@ a {
   color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
+  transition: color 150ms var(--ease-out), transform 160ms var(--ease-out);
 }
 
 a:hover {
@@ -92,6 +94,7 @@ a:hover {
 }
 
 .person-name {
+  position: relative;
   display: inline-block;
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 10vw, 7rem);
@@ -99,17 +102,284 @@ a:hover {
   letter-spacing: -0.04em;
   line-height: 0.9;
   text-decoration: none;
+  background-image: linear-gradient(
+    105deg,
+    var(--text) 0%,
+    var(--text) 40%,
+    #f7fcff 48%,
+    var(--cyan) 52%,
+    var(--text) 60%,
+    var(--text) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 0% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: name-light 720ms var(--ease-out) 80ms both;
 }
 
 a.person-name:hover {
-  color: var(--text);
+  color: transparent;
 }
 
-.lobby-lead,
-.cv-empty {
+.lobby-lead {
   max-width: 36rem;
   margin-top: 1.25rem;
   color: var(--muted);
+  animation: rise 260ms var(--ease-out) 80ms both;
+}
+
+.cv-page {
+  max-width: 40rem;
+}
+
+.cv-document {
+  margin-top: 1.5rem;
+  color: var(--text);
+  animation: rise 280ms var(--ease-out) 70ms both;
+}
+
+.cv-role,
+.cv-document p,
+.cv-document li {
+  max-width: 65ch;
+}
+
+.cv-role,
+.cv-where,
+.cv-stack,
+.cv-role-line p {
+  color: var(--muted);
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-trace-block {
+  margin-top: 1.75rem;
+  scroll-margin-top: 5rem;
+}
+
+.cv-trace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cv-trace button,
+.cv-projects button,
+.cv-trace-note button {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cv-trace button {
+  min-height: 2.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  transition:
+    transform 160ms var(--ease-out),
+    color 150ms var(--ease-out),
+    background-color 150ms var(--ease-out),
+    border-color 150ms var(--ease-out);
+}
+
+.cv-trace button[aria-pressed="true"] {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--ink);
+}
+
+.cv-trace button:active,
+.cv-trace-note button:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cv-trace button:hover {
+    color: var(--cyan);
+  }
+
+  .cv-trace button[aria-pressed="true"]:hover {
+    color: var(--ink);
+  }
+}
+
+.cv-trace-note {
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+}
+
+.cv-trace-note button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.cv-document section {
+  position: relative;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+}
+
+.cv-document section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  transform: scaleX(0.08);
+  transform-origin: left center;
+  animation: rule-in 340ms var(--ease-out) both;
+}
+
+.cv-document section:nth-of-type(1)::before { animation-delay: 40ms; }
+.cv-document section:nth-of-type(2)::before { animation-delay: 80ms; }
+.cv-document section:nth-of-type(3)::before { animation-delay: 120ms; }
+.cv-document section:nth-of-type(4)::before { animation-delay: 160ms; }
+.cv-document section:nth-of-type(5)::before { animation-delay: 200ms; }
+.cv-document section:nth-of-type(6)::before { animation-delay: 240ms; }
+
+.cv-document h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cv-document h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.cv-role-line,
+.cv-education li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.cv-document ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.cv-document li + li,
+.cv-projects li + li,
+.cv-skills div + div {
+  margin-top: 0.85rem;
+}
+
+.cv-document .cv-contact,
+.cv-document .cv-projects,
+.cv-document .cv-education {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.cv-duties li,
+.cv-projects li,
+.cv-skills div {
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+
+.cv-document [data-tone="dim"] {
+  opacity: 0.38;
+}
+
+.cv-projects li[data-tone="lit"] {
+  transform: translateX(8px);
+}
+
+.cv-projects li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.cv-projects button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  transition: transform 160ms var(--ease-out);
+}
+
+.cv-projects button:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cv-projects li[data-tone="dim"]:hover {
+    opacity: 0.72;
+  }
+}
+
+.cv-projects li::before {
+  content: "";
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: 0;
+  width: 3px;
+  background: var(--cyan);
+  transform: scaleY(0.2);
+  transform-origin: top center;
+  animation: edge-in 240ms var(--ease-out) both;
+}
+
+.cv-projects li:nth-child(even)::before {
+  background: var(--amber);
+}
+
+.cv-projects li:nth-child(1)::before { animation-delay: 90ms; }
+.cv-projects li:nth-child(2)::before { animation-delay: 140ms; }
+.cv-projects li:nth-child(3)::before { animation-delay: 190ms; }
+.cv-projects li:nth-child(4)::before { animation-delay: 240ms; }
+.cv-projects li:nth-child(5)::before { animation-delay: 290ms; }
+
+.cv-skills {
+  margin: 0.75rem 0 0;
+}
+
+.cv-skills div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.75rem;
+}
+
+.cv-skills dt {
+  color: var(--amber);
+}
+
+.cv-skills dd {
+  margin: 0;
+}
+
+@media (max-width: 540px) {
+  .cv-skills div {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
 }
 
 .experience-index {
@@ -127,7 +397,17 @@ a.person-name:hover {
   }
 }
 
+.experience-index li {
+  animation: rise 260ms var(--ease-out) both;
+}
+
+.experience-index li:nth-child(1) { animation-delay: 50ms; }
+.experience-index li:nth-child(2) { animation-delay: 100ms; }
+.experience-index li:nth-child(3) { animation-delay: 150ms; }
+.experience-index li:nth-child(4) { animation-delay: 200ms; }
+
 .experience-index a {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -136,14 +416,43 @@ a.person-name:hover {
   border-bottom: 1px solid var(--line);
   text-decoration: none;
   background: var(--glass);
+  transition: transform 160ms var(--ease-out), color 150ms var(--ease-out);
 }
 
-.experience-index li:nth-child(odd) a {
-  box-shadow: inset 3px 0 0 var(--cyan);
+.experience-index a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--cyan);
+  transform: scaleY(0.2);
+  transform-origin: top center;
+  animation: edge-in 280ms var(--ease-out) both;
 }
 
-.experience-index li:nth-child(even) a {
-  box-shadow: inset 3px 0 0 var(--amber);
+.experience-index li:nth-child(even) a::before {
+  background: var(--amber);
+}
+
+.experience-index li:nth-child(1) a::before { animation-delay: 70ms; }
+.experience-index li:nth-child(2) a::before { animation-delay: 120ms; }
+.experience-index li:nth-child(3) a::before { animation-delay: 170ms; }
+.experience-index li:nth-child(4) a::before { animation-delay: 220ms; }
+
+@media (hover: hover) and (pointer: fine) {
+  .experience-index a:hover {
+    transform: translateY(-3px);
+  }
+
+  .experience-index a:hover:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+}
+
+.experience-index a:active {
+  transform: scale(0.98);
 }
 
 @media (min-width: 720px) {
@@ -180,11 +489,49 @@ a.person-name:hover {
   background: var(--glass);
   backdrop-filter: blur(16px);
   text-decoration: none;
+  transition: transform 160ms var(--ease-out), color 150ms var(--ease-out);
+}
+
+.back-lobby:active,
+.shell-nav a:active,
+.cv-contact a:active {
+  transform: scale(0.97);
 }
 
 @keyframes fade {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes name-light {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+
+@keyframes edge-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rule-in {
+  to { transform: scaleX(1); }
 }
 
 @keyframes slide {
@@ -266,5 +613,26 @@ a.person-name:hover {
   ::view-transition-group(*) {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
+  }
+
+  .lobby-lead,
+  .cv-document,
+  .cv-document section::before,
+  .cv-projects li::before,
+  .experience-index li,
+  .experience-index a::before,
+  .person-name {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    background-position: 0% 0;
+  }
+
+  .cv-duties li,
+  .cv-projects li,
+  .cv-skills div,
+  .cv-trace button,
+  .cv-projects button {
+    transition: none;
   }
 }

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { ViewTransition } from "react";
+import { CvDocument } from "@/components/cv/cv-document";
 import { PageTransition } from "@/components/shared/page-transition";
 
 export const metadata: Metadata = {
   title: "CV",
-  description: "CV for Hao Yang. The page is waiting for the real text.",
+  description:
+    "CV of Hao Yang, full-stack web developer. Laravel, Filament, WordPress, and a RAG study assistant.",
 };
 
 export default function CvPage() {
@@ -14,9 +16,7 @@ export default function CvPage() {
         <ViewTransition name="person-name" share="text-morph" default="none">
           <h1 className="person-name">Hao Yang</h1>
         </ViewTransition>
-        <p className="cv-empty">
-          This page is the CV. It is empty until the real text is written here.
-        </p>
+        <CvDocument />
       </main>
     </PageTransition>
   );
